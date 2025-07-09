@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato | H4ckTech</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #33ff33;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+      flex-direction: column;
+    }
+
+    form {
+      background-color: #111;
+      border: 1px solid #33ff33;
+      border-left: 5px solid #00ff00;
+      padding: 2rem;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 1rem;
+      color: #00ffcc;
+    }
+
+    input, textarea {
+      width: 100%;
+      background-color: #000;
+      border: 1px solid #33ff33;
+      color: #33ff33;
+      padding: 0.5rem;
+      border-radius: 3px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #000;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #00ff00;
+      color: #000;
+    }
+
+    h1 {
+      color: #33ff33;
+      text-shadow: 0 0 8px #33ff33;
+      margin-bottom: 2rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #33ff33;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #33ff33; }
+    }
+
+    .terminal-msg {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #111;
+      border: 1px solid #33ff33;
+      border-left: 5px solid #00ff00;
+      border-radius: 5px;
+      font-size: 1rem;
+      white-space: pre;
+      box-shadow: 0 0 10px #00ff00;
+      display: none;
+      text-align: left;
+      max-width: 500px;
+    }
+
+    #new-message-btn {
+      margin-top: 1rem;
+      display: none;
+    }
+
+     /* Botão voltar */
+    .bnt {
+      margin-top: 2rem;
+      background-color: #111;
+      border: 1px solid #33ff33;
+      border-left: 5px solid #00ff00;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1.1rem;
+      color: #bbff00;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ff00;
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+    }
+    .bnt:hover,
+    .bnt:focus {
+      background-color: #00ff0086;
+      color: #000;
+      outline: none;
+      box-shadow: 0 0 30px #00ff00;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <audio id="bg-music" src="https://files.catbox.moe/89e5e3.mp3" autoplay loop></audio>
+  <audio id="send-sound" src="https://www.soundjay.com/button/sounds/button-09.mp3" preload="auto"></audio>
+
+  <main>
+    <form id="contact-form" action="https://formspree.io/f/myzjqvjy" method="POST">
+      <h1>Contato H4ckTech</h1>
+      <label>
+        Seu e-mail:
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Sua mensagem:
+        <textarea name="message" required></textarea>
+      </label>
+      <button type="submit">Enviar</button>
+  
+
+    <div id="msg-confirmacao" class="terminal-msg"></div>
+   
+    <button id="new-message-btn" onclick="novaMensagem()">Nova Mensagem</button>
+      </form>  
+    
+    
+      <a href="index.html" class="bnt">Voltar</a>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    let letters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&'.split('');
+    let fontSize = 14;
+    let columns = canvas.width / fontSize;
+    let drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      drops.forEach((y, i) => {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        const x = i * fontSize;
+        ctx.fillText(text, x, y * fontSize);
+        drops[i] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
+      });
+    }
+
+    setInterval(drawMatrix, 35);
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const form = document.getElementById("contact-form");
+    const msgBox = document.getElementById("msg-confirmacao");
+    const sendSound = document.getElementById("send-sound");
+    const btnNova = document.getElementById("new-message-btn");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      sendSound.currentTime = 0;
+      sendSound.play();
+      form.style.display = "none";
+
+      const texto = ">> Mensagem enviada com sucesso!\n>> Responderemos em breve...";
+      let index = 0;
+      msgBox.style.display = "block";
+      msgBox.innerHTML = "";
+
+      function escreverTerminal() {
+        if (index < texto.length) {
+          msgBox.innerHTML += texto.charAt(index);
+          index++;
+          setTimeout(escreverTerminal, 40);
+        } else {
+          btnNova.style.display = "inline-block";
+        }
+      }
+
+      escreverTerminal();
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+    });
+
+    function novaMensagem() {
+      form.reset();
+      msgBox.style.display = "none";
+      btnNova.style.display = "none";
+      form.style.display = "block";
+    }
+  </script>
+</body>
+</html>

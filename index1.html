@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H4ckTech | Serviços</title>
+  <style>
+    /* Reset e base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #33ff33;
+      padding: 2rem;
+    }
+
+    header, footer {
+      text-align: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #33ff33;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      text-shadow: 0 0 8px #33ff33;
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: #33ff33;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffcc;
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px #33ff33;
+    }
+
+    .terminal-box {
+      background-color: #111;
+      border: 1px solid #33ff33;
+      border-left: 5px solid #00ff00;
+      border-radius: 5px;
+      padding: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    .servico {
+      margin-bottom: 1.5rem;
+    }
+
+    .servico-title {
+      color: #00ffcc;
+      font-weight: bold;
+    }
+
+    footer {
+      border-top: 1px solid #33ff33;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>H4ckTech</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="index1.html">Serviços</a>
+      <a href="index2.html">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="servicos">
+      <h2>Serviços Disponíveis</h2>
+      <div class="terminal-box">
+        <div class="servico">
+          <div class="servico-title">[1] Formatação + Backup</div>
+          Formatamos seu PC com segurança e fazemos backup dos dados importantes.
+        </div>
+
+        <div class="servico">
+          <div class="servico-title">[2] Remoção de Vírus e Malware</div>
+          Eliminamos ameaças silenciosas, com verificação profunda no sistema.
+        </div>
+
+        <div class="servico">
+          <div class="servico-title">[3] Upgrade de Hardware</div>
+          Troca de peças, instalação de SSD, mais RAM ou setup gamer completo.
+        </div>
+
+        <div class="servico">
+          <div class="servico-title">[4] Otimização de Desempenho</div>
+          Aceleração de sistema, ajustes no boot e limpeza de arquivos inúteis.
+        </div>
+
+        <div class="servico">
+          <div class="servico-title">[5] Montagem de PC Gamer</div>
+          Montagem personalizada com foco em performance e estética.
+        </div>
+
+        <div class="servico">
+          <div class="servico-title">[6] Recuperação de Dados</div>
+          Recuperamos arquivos deletados de HDs, SSDs, pendrives e cartões SD.
+        </div>
+
+        <div class="servico">
+          <div class="servico-title">[7] Limpeza Técnica</div>
+          Limpeza física interna e troca de pasta térmica para evitar superaquecimento.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 H4ckTech - Todos os direitos reservados.
+  </footer>
+</body>
+</html>

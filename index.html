@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H4ckTech | Manutenção de Microcomputadores</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #33ff33;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      border-bottom: 1px solid #33ff33;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      text-shadow: 0 0 5px #33ff33;
+      animation: blinkText 1s steps(2, start) infinite;
+    }
+
+    @keyframes blinkText {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    nav a {
+      color: #33ff33;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      color: #00ffcc;
+    }
+
+    section {
+      max-width: 800px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px #33ff33;
+    }
+
+    footer {
+      border-top: 1px solid #33ff33;
+      padding-top: 1rem;
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .terminal-box {
+      background-color: #111;
+      padding: 1rem;
+      border: 1px solid #33ff33;
+      border-radius: 5px;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-top: 1rem;
+      min-height: 100px;
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid #33ff33;
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #33ff33; }
+    }
+
+    .boot-sequence {
+      font-size: 0.9rem;
+      color: #00ff00;
+      text-align: left;
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 600px;
+      background-color: #111;
+      padding: 1rem;
+      border-left: 3px solid #33ff33;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>H4ckTech</h1>
+    <nav>
+      <a href="#servicos">Serviços</a>
+      <a href="index1.html">Projetos</a>
+      <a href="index3.html">Sobre</a>
+      <a href="index2.html">Contato</a>
+      <a href="index4.html">desenvolvedor-Web</a>
+    </nav>
+  </header>
+
+  <div class="boot-sequence" id="boot">
+    Inicializando H4ckTech v1.0...
+  </div>
+
+  <section id="servicos">
+    <h2 class="typewriter">Serviços</h2>
+    <div class="terminal-box">
+      - Formatação completa com backup<br>
+      - Remoção de vírus e malwares<br>
+      - Troca e upgrade de hardware<br>
+      - Otimização de desempenho<br>
+      - Montagem de PCs Gamer
+    </div>
+  </section>
+
+  <section id="projetos">
+    <h2 class="typewriter">Projetos</h2>
+    <div class="terminal-box">
+      <strong>[PC Gamer 01]</strong> - Montagem personalizada com RTX 4070 e Ryzen 7<br>
+      <strong>[Recuperação Dados]</strong> - HD externo de 2TB com falha lógica recuperado com 98% de sucesso<br>
+      <strong>[Limpeza Técnica]</strong> - Remoção completa de sujeira e troca de pasta térmica em notebook Dell<br>
+      <strong>[Consultoria]</strong> - Orientação e upgrade completo de setup home office<br>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <h2 class="typewriter">Sobre</h2>
+    <p>Somos especialistas em manutenção de microcomputadores, com foco em performance, segurança e confiabilidade. Atuamos no estilo "h4ck3r" moderno: direto ao ponto, sem enrolação.</p>
+  </section>
+
+  <section id="contato">
+    <h2 class="typewriter">Contato</h2>
+    <p>Email: suporte@h4cktech.com</p>
+    <p>WhatsApp: (69) 9 9999-9999</p>
+  </section>
+
+  <footer>
+    &copy; 2025 H4ckTech - Todos os direitos reservados.
+  </footer>
+
+  <audio id="typing-sound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
+
+  <script>
+    // Simula boot sequence com som de digitação
+    const boot = document.getElementById('boot');
+    const sound = document.getElementById('typing-sound');
+    const sequence = [
+      "[ OK ] Verificando sistema de arquivos...",
+      "[ OK ] Inicializando drivers de hardware...",
+      "[ OK ] Estabelecendo conexão segura...",
+      "[ OK ] Sistema pronto para uso. Bem-vindo ao H4ckTech!"
+    ];
+
+    let i = 0;
+    function typeBootLine() {
+      if (i < sequence.length) {
+        boot.innerText += "\n" + sequence[i];
+        sound.currentTime = 0;
+        sound.play();
+        i++;
+        setTimeout(typeBootLine, 1000);
+      }
+    }
+
+    setTimeout(typeBootLine, 1000);
+  </script>
+</body>
+</html>
